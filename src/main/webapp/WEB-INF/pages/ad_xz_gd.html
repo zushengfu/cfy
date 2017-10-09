@@ -1,0 +1,152 @@
+ <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="glyphicon glyphicon-home"></i> 档案管理系统</a></li>
+        <li>新增档案</li>
+        <li class="active">新增归档文件</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+  <section class="content container-fluid" style="max-width:95%;background:#ffffff" >
+    <div class="row clearfix">
+      <div class="col-md-11" style=" margin-left:4%;">
+        <div style="padding-top: 20px;">
+          <i class="glyphicon glyphicon-book"></i>  新增卷内文件
+          <hr>
+        </div>
+         <form class="form-horizontal col-md-12" role="form" id="adXzGdForm">
+
+
+            <div class="row clearfix xinzengformrow">
+              <label class="col-md-2 xinzenglabel">全宗编号 <i style="color:red;vertical-align: middle;">*</i></label>
+              <div class="col-md-4 xinzenginput">
+                <select  name="fondsNum" class="form-control">
+
+                </select>
+              </div>
+              <label class="col-md-2 xinzenglabel">年度 <i style="color:red;vertical-align: middle;">*</i></label>
+              <div class="col-md-4 xinzenginput">
+                <select  name="caseYear" class="form-control">
+
+                </select>
+              </div>
+            </div>
+           <div class="row clearfix xinzengformrow">
+              <label id="adXzAjFoAjbh" class="col-md-2 xinzenglabel">盒号 <i style="color:red;vertical-align: middle;">*</i></label>
+              <div class="col-md-4 xinzenginput">
+                <select  name="caseNum"  class="form-control">
+
+                </select>
+              </div>
+              <label class="col-md-2 xinzenglabel">件号 <i style="color:red;vertical-align: middle;">*</i></label>
+              <div class="col-md-4 xinzenginput">
+                <input type="text" class="form-control" placeholder="请输入目录号(仅卷内文件)" name="fileNum" required="required">
+              </div>
+            </div>
+
+
+            <div class="row clearfix xinzengformrow">
+              <label class="col-md-2 xinzenglabel">题名 <i style="color:red;vertical-align: middle;">*</i></label>
+              <div class="col-md-4 xinzenginput">
+                <input type="text" class="form-control" placeholder="请输入库房号" name="subjectName">
+              </div>
+              <label class="col-md-2 xinzenglabel">机构 <i style="color:red;vertical-align: middle;">*</i></label>
+              <div class="col-md-4 xinzenginput">
+                <select name="orgType"  class="form-control">
+                  <option></option>
+                  <option>发文</option>
+                  <option>来文</option>
+                  <option>会议</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row clearfix xinzengformrow">
+              <label class="col-md-2 xinzenglabel">文号</label>
+              <div class="col-md-4 xinzenginput">
+                <select  name="fileDescribeNum"  class="form-control">
+                  <option></option>
+                  <option>()</option>
+                  <option>[]</option>
+                </select>
+              </div>
+              <label class="col-md-2 xinzenglabel">页数</label>
+                  <div class="col-md-4 xinzenginput">
+                        <input type="text" class="form-control" placeholder="请输入页数" name="pageNum">
+                  </div>
+
+            </div>
+
+            <div class="row clearfix xinzengformrow">
+              <label class="col-md-2 xinzenglabel">密级</label>
+              <div class="col-md-4 xinzenginput">
+                <select name="securityRank"   class="form-control">
+                  <option></option>
+                  <option>公开</option>
+                  <option>秘密</option>
+                  <option>机密</option>
+                  <option>绝密</option>
+                </select>
+              </div>
+              <label class="col-md-2 xinzenglabel">责任者</label>
+              <div class="col-md-4 xinzenginput">
+                    <input type="text" class="form-control" placeholder="请输入档案馆代码" name="responsibler">
+              </div>
+            </div>
+
+              <div class="row clearfix xinzengformrow">
+              <label class="col-md-2 xinzenglabel">日期</label>
+              <div class="col-md-4 xinzenginput">
+                    <input type="text" class="form-control" placeholder="请输入档案馆代码" name="time">
+              </div>
+
+              <label class="col-md-2 xinzenglabel">保管期限</label>
+              <div class="col-md-4 xinzenginput">
+                <select name="safekeepingTerm"   class="form-control">
+                  <option></option>
+                  <option>短期</option>
+                  <option>长期</option>
+                  <option>永久</option>
+                </select>
+              </div>
+              </div>
+
+
+            <div class="row clearfix xinzengformrow" style="border-bottom:1px solid lightgrey;">
+
+              <label class="col-md-2 xinzenglabel" >备注</label>
+              <div class="col-md-10 xinzenginput">
+                <input type="text" class="form-control" placeholder="填写备注" name="remarks">
+              </div>
+
+
+            </div>
+
+            <div class="row clearfix" style="margin-top:30px;">
+
+                        <input id="adXzGdFoFile" name="file" type="file" multiple>
+
+
+              </div>
+              <br><br>
+              <div class="row clearfix ">
+            <div class="col-md-2 col-md-offset-4">
+                    <button id="adXzGdFoRes" class="form-control btn btn-default" type="button">重&nbsp;置</button>
+
+                    </div>
+                    <div class="col-md-2">
+                      <button id="adXzGdFoSub"  class="form-control btn btn-info" type="submit">录&nbsp;著</button>
+
+                    </div>
+
+            </div>
+
+
+          </form>
+
+
+        </div>
+        </div>
+</section>
+
+

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javen.dao.FileInfoPictureDao" >
+  <resultMap id="BaseResultMap" type="com.javen.model.FileInfoPicture" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="fonds_num" property="fondsNum" jdbcType="VARCHAR" />
+    <result column="file_year" property="fileYear" jdbcType="VARCHAR" />
+    <result column="safekeeping_term" property="safekeepingTerm" jdbcType="VARCHAR" />
+    <result column="file_num" property="fileNum" jdbcType="VARCHAR" />
+    <result column="pic_name" property="picName" jdbcType="VARCHAR" />
+    <result column="txt_index" property="txtIndex" jdbcType="BIT" />
+    <result column="order_num" property="orderNum" jdbcType="VARCHAR" />
+    <result column="org_type" property="orgType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, fonds_num, file_year, safekeeping_term, file_num, pic_name, txt_index, order_num,org_type
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_picture
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="queryPicNameCount" resultType="java.lang.Integer" parameterType="String" >
+    select 
+    count(pic_name)
+    from file_picture
+    where fonds_num=#{0} and file_Year=#{1} and safekeeping_term=#{2}
+  </select>
+  
+  <select id="getAllFileInfoPictureByFilePath" resultMap="BaseResultMap" parameterType="String" >
+    select 
+   <include refid="Base_Column_List" />
+    from file_picture
+    where pic_name=#{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.javen.model.FileInfoPicture" >
+    delete from file_picture
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="dePicture" parameterType="String" >
+    delete from file_picture
+    where pic_name=#{0}
+  </delete>
+  
+  <delete id="deleteByFileInfoPicture" parameterType="com.javen.model.FileInfoPicture" >
+    delete from file_picture
+    <where>
+     	<if test="fondsNum!=null and fondsNum!=''">  
+            and fonds_num = #{fondsNum,jdbcType=VARCHAR}  
+    	</if>  
+    	<if test="safekeepingTerm != null and fondsNum!=''" >
+        	and safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR}
+        </if>
+        <if test="fileYear != null and fielYear!=''" >
+        	and fiel_year = #{fileYear,jdbcType=VARCHAR}
+        </if>
+    </where>
+  </delete>
+  
+  <insert id="insert" parameterType="com.javen.model.FileInfoPicture" >
+    insert into file_picture (ID, fonds_num, file_year, 
+      safekeeping_term, file_num, pic_name, 
+      txt_index, order_num,orgType)
+    values (#{id,jdbcType=INTEGER}, #{fondsNum,jdbcType=VARCHAR}, #{fileYear,jdbcType=VARCHAR}, 
+      #{safekeepingTerm,jdbcType=VARCHAR}, #{fileNum,jdbcType=VARCHAR}, #{picName,jdbcType=VARCHAR}, 
+      #{txtIndex,jdbcType=BIT}, #{orderNum,jdbcType=VARCHAR},#{orgType,jdbcType=VARCHAR})
+  </insert>
+  
+   <insert id="addPicture" parameterType="String" >
+    insert into file_picture (fonds_num, file_year, 
+      safekeeping_term, file_num, pic_name)
+    values (#{0},#{1},#{2},#{3},#{4})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.javen.model.FileInfoPicture" >
+    insert into file_picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fondsNum != null" >
+        fonds_num,
+      </if>
+      <if test="fileYear != null" >
+        file_year,
+      </if>
+      <if test="safekeepingTerm != null" >
+        safekeepingTerm,
+      </if>
+      <if test="fileNum != null" >
+        file_num,
+      </if>
+      <if test="picName != null" >
+        pic_name,
+      </if>
+      <if test="txtIndex != null" >
+        txt_index,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="orgType != null" >
+        org_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fondsNum != null" >
+        #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileYear != null" >
+        #{fileYear,jdbcType=VARCHAR},
+      </if>
+      <if test="safekeepingTerm != null" >
+        #{safekeepingTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="picName != null" >
+        #{picName,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIndex != null" >
+        #{txtIndex,jdbcType=BIT},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        #{orgType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javen.model.FileInfoPicture" >
+    update file_picture
+    <set >
+      <if test="fondsNum != null" >
+        fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileYear != null" >
+        file_year = #{fileYear,jdbcType=VARCHAR},
+      </if>
+      <if test="safekeepingTerm != null" >
+        safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        file_num = #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="picName != null" >
+        pic_name = #{picName,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIndex != null" >
+        txt_index = #{txtIndex,jdbcType=BIT},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        org_type = #{orgType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javen.model.FileInfoPicture" >
+    update file_picture
+    set fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      file_year = #{fileYear,jdbcType=VARCHAR},
+      safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR},
+      file_num = #{fileNum,jdbcType=VARCHAR},
+      pic_name = #{picName,jdbcType=VARCHAR},
+      txt_index = #{txtIndex,jdbcType=BIT},
+      order_num = #{orderNum,jdbcType=VARCHAR},
+      org_type = #{orgType,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

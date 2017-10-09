@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javen.dao.FileRecordsNewCharactorDao" >
+  <resultMap id="BaseResultMap" type="com.javen.model.FileRecordsNewCharactor" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fonds_num" property="fondsNum" jdbcType="VARCHAR" />
+    <result column="case_num" property="caseNum" jdbcType="VARCHAR" />
+    <result column="catalog_num" property="catalogNum" jdbcType="VARCHAR" />
+    <result column="file_num" property="fileNum" jdbcType="VARCHAR" />
+    <result column="new_charactor_1" property="newCharactor1" jdbcType="VARCHAR" />
+    <result column="value_1" property="value1" jdbcType="VARCHAR" />
+    <result column="new_charactor_2" property="newCharactor2" jdbcType="VARCHAR" />
+    <result column="value_2" property="value2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fonds_num, case_num, catalog_num, file_num, new_charactor_1, value_1, new_charactor_2, 
+    value_2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_records_new_charactor
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getSingle" resultMap="BaseResultMap" parameterType="com.javen.model.FileRecordsNewCharactor" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_records_new_charactor
+    where fonds_num=#{fondsNum} and case_num=#{caseNum} and catalog_num=#{catalogNum} and file_num=#{fileNum}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from file_records_new_charactor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javen.model.FileRecordsNewCharactor" >
+    insert into file_records_new_charactor (id, fonds_num, case_num, 
+      catalog_num, file_num, new_charactor_1, 
+      value_1, new_charactor_2, value_2
+      )
+    values (#{id,jdbcType=INTEGER}, #{fondsNum,jdbcType=VARCHAR}, #{caseNum,jdbcType=VARCHAR}, 
+      #{catalogNum,jdbcType=VARCHAR}, #{fileNum,jdbcType=VARCHAR}, #{newCharactor1,jdbcType=VARCHAR}, 
+      #{value1,jdbcType=VARCHAR}, #{newCharactor2,jdbcType=VARCHAR}, #{value2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.javen.model.FileRecordsNewCharactor" >
+    insert into file_records_new_charactor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fondsNum != null" >
+        fonds_num,
+      </if>
+      <if test="caseNum != null" >
+        case_num,
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num,
+      </if>
+      <if test="fileNum != null" >
+        file_num,
+      </if>
+      <if test="newCharactor1 != null" >
+        new_charactor_1,
+      </if>
+      <if test="value1 != null" >
+        value_1,
+      </if>
+      <if test="newCharactor2 != null" >
+        new_charactor_2,
+      </if>
+      <if test="value2 != null" >
+        value_2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fondsNum != null" >
+        #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        #{catalogNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="newCharactor1 != null" >
+        #{newCharactor1,jdbcType=VARCHAR},
+      </if>
+      <if test="value1 != null" >
+        #{value1,jdbcType=VARCHAR},
+      </if>
+      <if test="newCharactor2 != null" >
+        #{newCharactor2,jdbcType=VARCHAR},
+      </if>
+      <if test="value2 != null" >
+        #{value2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javen.model.FileRecordsNewCharactor" >
+    update file_records_new_charactor
+    <set >
+      <if test="fondsNum != null" >
+        fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        case_num = #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num = #{catalogNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        file_num = #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="newCharactor1 != null" >
+        new_charactor_1 = #{newCharactor1,jdbcType=VARCHAR},
+      </if>
+      <if test="value1 != null" >
+        value_1 = #{value1,jdbcType=VARCHAR},
+      </if>
+      <if test="newCharactor2 != null" >
+        new_charactor_2 = #{newCharactor2,jdbcType=VARCHAR},
+      </if>
+      <if test="value2 != null" >
+        value_2 = #{value2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javen.model.FileRecordsNewCharactor" >
+    update file_records_new_charactor
+    set fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      case_num = #{caseNum,jdbcType=VARCHAR},
+      catalog_num = #{catalogNum,jdbcType=VARCHAR},
+      file_num = #{fileNum,jdbcType=VARCHAR},
+      new_charactor_1 = #{newCharactor1,jdbcType=VARCHAR},
+      value_1 = #{value1,jdbcType=VARCHAR},
+      new_charactor_2 = #{newCharactor2,jdbcType=VARCHAR},
+      value_2 = #{value2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

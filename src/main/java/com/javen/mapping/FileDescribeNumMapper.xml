@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javen.dao.FileDescribeNumDao" >
+  <resultMap id="BaseResultMap" type="com.javen.model.FileDescribeNum" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fkey" property="fkey" jdbcType="VARCHAR" />
+    <result column="fvalue" property="fvalue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fkey, fvalue
+  </sql>
+  <select id="selectByPrimaryfkey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_describe_num
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getFileDescribeNum" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from file_describe_num
+  </select>
+  
+  <delete id="deleteByPrimaryfkey" parameterType="com.javen.model.FileDescribeNum" >
+    delete from file_describe_num
+    <where> 
+	    <if test="fkey != null">
+	         fkey = #{fkey}
+	    </if> 
+	    <if test="fvalue != null">
+	        AND fvalue = #{fvalue}
+	    </if>
+  	</where>
+  </delete>
+  
+  <delete id="restoreFileDescribeNum"  >
+    delete from file_describe_num
+    where id &gt;4
+  </delete>
+  
+  <insert id="insert" parameterType="com.javen.model.FileDescribeNum" >
+    insert into file_describe_num (id, fkey, fvalue
+      )
+    values (#{id,jdbcType=INTEGER}, #{fkey,jdbcType=VARCHAR}, #{fvalue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.javen.model.FileDescribeNum" >
+    insert into file_describe_num
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fkey != null" >
+        fkey,
+      </if>
+      <if test="fvalue != null" >
+        fvalue,
+      </if>
+    </trim>
+    <trim prefix="fvalues (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fkey != null" >
+        #{fkey,jdbcType=VARCHAR},
+      </if>
+      <if test="fvalue != null" >
+        #{fvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryfkeySelective" parameterType="com.javen.model.FileDescribeNum" >
+    update file_describe_num
+    <set >
+      <if test="fkey != null" >
+        fkey = #{fkey,jdbcType=VARCHAR},
+      </if>
+      <if test="fvalue != null" >
+        fvalue = #{fvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryfkey" parameterType="com.javen.model.FileDescribeNum" >
+    update file_describe_num
+    set fkey = #{fkey,jdbcType=VARCHAR},
+      fvalue = #{fvalue,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

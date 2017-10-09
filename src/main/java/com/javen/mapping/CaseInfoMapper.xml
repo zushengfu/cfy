@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javen.dao.CaseInfoDao" >
+  <resultMap id="BaseResultMap" type="com.javen.model.CaseInfo" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="fonds_num" property="fondsNum" jdbcType="VARCHAR" />
+    <result column="catalog_num" property="catalogNum" jdbcType="VARCHAR" />
+    <result column="case_num" property="caseNum" jdbcType="VARCHAR" />
+    <result column="case_name" property="caseName" jdbcType="VARCHAR" />
+    <result column="room_num" property="roomNum" jdbcType="VARCHAR" />
+    <result column="cab_num" property="cabNum" jdbcType="VARCHAR" />
+    <result column="case_year" property="caseYear" jdbcType="VARCHAR" />
+    <result column="responsibler" property="responsibler" jdbcType="VARCHAR" />
+    <result column="safekeeping_term" property="safekeepingTerm" jdbcType="VARCHAR" />
+    <result column="classify_num" property="classifyNum" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="org_type" property="orgType" jdbcType="VARCHAR" />
+    <result column="file_num" property="fileNum" jdbcType="VARCHAR" />
+    <result column="archive_num" property="archiveNum" jdbcType="VARCHAR" />
+    <result column="pages" property="pages" jdbcType="INTEGER" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, fonds_num, catalog_num, case_num, case_name, room_num, cab_num, case_year, responsibler, 
+    safekeeping_term, classify_num, start_time, end_time, org_type, file_num, archive_num, 
+    pages, remarks, upload_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_info
+    where fonds_num=#{fondsNum,jdbcType=VARCHAR} and case_num=#{caseNum,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="checkCaseExist" resultMap="BaseResultMap" parameterType="com.javen.model.CaseInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_info
+    where fonds_num=#{fondsNum,jdbcType=VARCHAR} and case_num=#{caseNum,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="queryCaseInfo" resultType="String" parameterType="com.javen.model.CaseInfo" >
+    select 
+    catalog_num
+    from case_info
+    where fonds_num=#{fondsNum,jdbcType=VARCHAR} and catalog_num is not null
+  </select>
+  
+  <select id="queryCaseInfoGdCaseYear" resultType="String" parameterType="com.javen.model.CaseInfo" >
+    select 
+    case_year
+    from case_info
+    where fonds_num=#{fondsNum,jdbcType=VARCHAR} and ( catalog_num is null or catalog_num = "")
+  </select>
+  
+   <select id="queryCaseInfoGdCaseNum" resultType="String" parameterType="com.javen.model.CaseInfo" >
+    select 
+    case_num
+    from case_info
+    where fonds_num=#{fondsNum,jdbcType=VARCHAR} and case_year=#{caseYear,jdbcType=VARCHAR} and (catalog_num is null or catalog_num="")
+  </select>
+  
+  <select id="queryCaseInfoNoCondition" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from case_info
+  </select>
+  
+  <select id="queryCaseInfoWithCondition" resultMap="BaseResultMap" parameterType="com.javen.model.CaseInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_info
+    <where>   
+              <if test="fondsNum!=null and fondsNum!=''">  
+                     and fonds_num like '%${fondsNum}%'  
+              </if> 
+              <if test="catalogNum!=null and catalogNum!=''">  
+                     and catalog_num like '%${catalogNum}%'  
+              </if> 
+              <if test="caseNum!=null and caseNum!=''">  
+                     and case_num like '%${caseNum}%'  
+              </if>
+              <if test="roomNum!=null and roomNum!=''">  
+                     and room_num like '%${roomNum}%'  
+              </if>
+              <if test="cabNum!=null and cabNum!=''">  
+                     and cab_num like '%${cabNum}%'  
+              </if>
+              <if test="caseYear!=null and caseYear!=''">  
+                     and case_year like '%${caseYear}%'  
+              </if>
+              <if test="responsibler!=null and responsebler!=''">  
+                     and responsibler like '%${responsebler}%'  
+              </if>
+              <if test="safekeepingTerm!=null and safekeepingTerm!=''">  
+                     and safekeeping_term like '%${safekeepingTerm}%'  
+              </if>
+              <if test="classifyNum!=null and classifyNum!=''">  
+                     and classify_num like '%${classifyNum}%'  
+              </if>
+              <if test="startTime!=null and startTime!=''">  
+                     and start_time like '%${startTime}%'  
+              </if>
+              <if test="endTime!=null and endTime!=''">  
+                     and end_time like '%${endTime}%'  
+              </if>
+              <if test="orgType!=null and orgType!=''">  
+                     and org_type like '%${orgType}%'  
+              </if>
+              <if test="fileNum!=null and fileNum!=''">  
+                     and file_num like '%${fileNum}%'  
+              </if>
+              <if test="archiveNum!=null and archiveNum!=''">  
+                     and archive_num like '%${archiveNum}%'  
+              </if>
+     </where> 
+  </select>
+  
+  <select id="queryCaseInfoForAjSearch" resultMap="BaseResultMap" parameterType="com.javen.model.CaseInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_info 
+    where fonds_num=#{fondsNum,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.javen.model.CaseInfo" >
+    delete from case_info
+    where fonds_num=#{fondsNum,jdbcType=VARCHAR} and case_num=#{caseNum,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteByCaseInfo" parameterType="com.javen.model.CaseInfo" >
+    delete from case_info
+    where fonds_num=#{fondsNum,jdbcType=VARCHAR} 
+  </delete>
+  
+  <insert id="insert" parameterType="com.javen.model.CaseInfo" >
+    insert into case_info (ID, fonds_num, catalog_num, 
+      case_num, case_name, room_num, 
+      cab_num, case_year, responsibler, 
+      safekeeping_term, classify_num, start_time, 
+      end_time, org_type, file_num, 
+      archive_num, pages, remarks, 
+      upload_time)
+    values (#{id,jdbcType=INTEGER}, #{fondsNum,jdbcType=VARCHAR}, #{catalogNum,jdbcType=VARCHAR}, 
+      #{caseNum,jdbcType=VARCHAR}, #{caseName,jdbcType=VARCHAR}, #{roomNum,jdbcType=VARCHAR}, 
+      #{cabNum,jdbcType=VARCHAR}, #{caseYear,jdbcType=VARCHAR}, #{responsibler,jdbcType=VARCHAR}, 
+      #{safekeepingTerm,jdbcType=VARCHAR}, #{classifyNum,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{orgType,jdbcType=VARCHAR}, #{fileNum,jdbcType=VARCHAR}, 
+      #{archiveNum,jdbcType=VARCHAR}, #{pages,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, 
+      #{uploadTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javen.model.CaseInfo" >
+    insert into case_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fondsNum != null" >
+        fonds_num,
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num,
+      </if>
+      <if test="caseNum != null" >
+        case_num,
+      </if>
+      <if test="caseName != null" >
+        case_name,
+      </if>
+      <if test="roomNum != null" >
+        room_num,
+      </if>
+      <if test="cabNum != null" >
+        cab_num,
+      </if>
+      <if test="caseYear != null" >
+        case_year,
+      </if>
+      <if test="responsibler != null" >
+        responsibler,
+      </if>
+      <if test="safekeepingTerm != null" >
+        safekeeping_term,
+      </if>
+      <if test="classifyNum != null" >
+        classify_num,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="orgType != null" >
+        org_type,
+      </if>
+      <if test="fileNum != null" >
+        file_num,
+      </if>
+      <if test="archiveNum != null" >
+        archive_num,
+      </if>
+      <if test="pages != null" >
+        pages,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fondsNum != null" >
+        #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        #{catalogNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseName != null" >
+        #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNum != null" >
+        #{roomNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cabNum != null" >
+        #{cabNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseYear != null" >
+        #{caseYear,jdbcType=VARCHAR},
+      </if>
+      <if test="responsibler != null" >
+        #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="safekeepingTerm != null" >
+        #{safekeepingTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyNum != null" >
+        #{classifyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveNum != null" >
+        #{archiveNum,jdbcType=VARCHAR},
+      </if>
+      <if test="pages != null" >
+        #{pages,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javen.model.CaseInfo" >
+    update case_info
+    <set >
+      <if test="fondsNum != null" >
+        fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num = #{catalogNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        case_num = #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseName != null" >
+        case_name = #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNum != null" >
+        room_num = #{roomNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cabNum != null" >
+        cab_num = #{cabNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseYear != null" >
+        case_year = #{caseYear,jdbcType=VARCHAR},
+      </if>
+      <if test="responsibler != null" >
+        responsibler = #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="safekeepingTerm != null" >
+        safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyNum != null" >
+        classify_num = #{classifyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        org_type = #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        file_num = #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveNum != null" >
+        archive_num = #{archiveNum,jdbcType=VARCHAR},
+      </if>
+      <if test="pages != null" >
+        pages = #{pages,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javen.model.CaseInfo" >
+    update case_info
+    set fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      catalog_num = #{catalogNum,jdbcType=VARCHAR},
+      case_num = #{caseNum,jdbcType=VARCHAR},
+      case_name = #{caseName,jdbcType=VARCHAR},
+      room_num = #{roomNum,jdbcType=VARCHAR},
+      cab_num = #{cabNum,jdbcType=VARCHAR},
+      case_year = #{caseYear,jdbcType=VARCHAR},
+      responsibler = #{responsibler,jdbcType=VARCHAR},
+      safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR},
+      classify_num = #{classifyNum,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      org_type = #{orgType,jdbcType=VARCHAR},
+      file_num = #{fileNum,jdbcType=VARCHAR},
+      archive_num = #{archiveNum,jdbcType=VARCHAR},
+      pages = #{pages,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+ <update id="updateByCaseInfo" parameterType="com.javen.model.CaseInfo" >
+    update case_info
+    set 
+      catalog_num = #{catalogNum,jdbcType=VARCHAR},
+      case_name = #{caseName,jdbcType=VARCHAR},
+      room_num = #{roomNum,jdbcType=VARCHAR},
+      cab_num = #{cabNum,jdbcType=VARCHAR},
+      case_year = #{caseYear,jdbcType=VARCHAR},
+      responsibler = #{responsibler,jdbcType=VARCHAR},
+      safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR},
+      classify_num = #{classifyNum,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      org_type = #{orgType,jdbcType=VARCHAR},
+      file_num = #{fileNum,jdbcType=VARCHAR},
+      archive_num = #{archiveNum,jdbcType=VARCHAR},
+      pages = #{pages,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP}
+    where fonds_num = #{fondsNum,jdbcType=VARCHAR} and case_num = #{caseNum,jdbcType=VARCHAR}
+  </update>
+  <update id="hookFondsInfo" parameterType="String" >
+    update case_info
+    set 
+      fonds_num = #{1}
+    where fonds_num = #{0}
+  </update>
+  
+  <update id="updateMoreCaseInfo" parameterType="String" >
+    update case_info
+    set 
+      #{2}=replace(#{2},#{3},#{4})
+    where fonds_num = #{0} and case_num=#{1}
+  </update>
+</mapper>

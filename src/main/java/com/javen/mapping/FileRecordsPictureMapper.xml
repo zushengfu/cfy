@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javen.dao.FileRecordsPictureDao" >
+  <resultMap id="BaseResultMap" type="com.javen.model.FileRecordsPicture" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="fonds_num" property="fondsNum" jdbcType="VARCHAR" />
+    <result column="catalog_num" property="catalogNum" jdbcType="VARCHAR" />
+    <result column="case_num" property="caseNum" jdbcType="VARCHAR" />
+    <result column="file_num" property="fileNum" jdbcType="VARCHAR" />
+    <result column="pic_name" property="picName" jdbcType="VARCHAR" />
+    <result column="txt_index" property="txtIndex" jdbcType="BIT" />
+    <result column="order_num" property="orderNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, fonds_num, catalog_num, case_num, file_num, pic_name, txt_index, order_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_records_picture
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="queryPicNmaeCount" resultType="java.lang.Integer" parameterType="String" >
+    select 
+     count(pic_name)
+    from file_records_picture
+    where fonds_num=#{0} and catalog_num=#{1} and case_num=#{2}
+  </select>
+  
+   <select id="getAllFileRecordsPictureByFilePath" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_records_picture
+    where pic_name=#{0}
+  </select>
+  
+   <select id="getJnTpAdd" resultType="String" parameterType="String" >
+    select 
+    pic_name
+    from file_records_picture
+    where fonds_num=#{0} and catalog_num=#{1} and file_num=#{2}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.javen.model.FileRecordsPicture" >
+    delete from file_records_picture
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="deleteByFileRecordsPicture" parameterType="com.javen.model.FileRecordsPicture" >
+    delete from file_records_picture
+    <where>
+     	<if test="fondsNum!=null and fondsNum!=''">  
+            and fonds_num = #{fondsNum,jdbcType=VARCHAR}  
+    	</if>  
+    	<if test="caseNum != null and fondsNum!=''" >
+        	and case_num = #{caseNum,jdbcType=VARCHAR}
+        </if>
+        <if test="catalogNum != null and catalogNum!=''" >
+        	and catalog_num = #{catalogNum,jdbcType=VARCHAR}
+        </if>
+    </where>
+  </delete>
+  
+  <delete id="dePicture" parameterType="String" >
+    delete from file_records_picture
+    where pic_name=#{0}
+  </delete>
+  
+  <insert id="insert" parameterType="com.javen.model.FileRecordsPicture" >
+    insert into file_records_picture (ID, fonds_num, catalog_num, 
+      case_num, file_num, pic_name, 
+      txt_index, order_num)
+    values (#{id,jdbcType=INTEGER}, #{fondsNum,jdbcType=VARCHAR}, #{catalogNum,jdbcType=VARCHAR}, 
+      #{caseNum,jdbcType=VARCHAR}, #{fileNum,jdbcType=VARCHAR}, #{picName,jdbcType=VARCHAR}, 
+      #{txtIndex,jdbcType=BIT}, #{orderNum,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="addPicture" parameterType="String" >
+    insert into file_records_picture (fonds_num, catalog_num, 
+      case_num, file_num, pic_name)
+    values (#{0},#{1},#{2},#{3},#{4})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.javen.model.FileRecordsPicture" >
+    insert into file_records_picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fondsNum != null" >
+        fonds_num,
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num,
+      </if>
+      <if test="caseNum != null" >
+        case_num,
+      </if>
+      <if test="fileNum != null" >
+        file_num,
+      </if>
+      <if test="picName != null" >
+        pic_name,
+      </if>
+      <if test="txtIndex != null" >
+        txt_index,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fondsNum != null" >
+        #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        #{catalogNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="picName != null" >
+        #{picName,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIndex != null" >
+        #{txtIndex,jdbcType=BIT},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javen.model.FileRecordsPicture" >
+    update file_records_picture
+    <set >
+      <if test="fondsNum != null" >
+        fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num = #{catalogNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        case_num = #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        file_num = #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="picName != null" >
+        pic_name = #{picName,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIndex != null" >
+        txt_index = #{txtIndex,jdbcType=BIT},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javen.model.FileRecordsPicture" >
+    update file_records_picture
+    set fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      catalog_num = #{catalogNum,jdbcType=VARCHAR},
+      case_num = #{caseNum,jdbcType=VARCHAR},
+      file_num = #{fileNum,jdbcType=VARCHAR},
+      pic_name = #{picName,jdbcType=VARCHAR},
+      txt_index = #{txtIndex,jdbcType=BIT},
+      order_num = #{orderNum,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPicName" parameterType="com.javen.model.FileRecordsPicture" >
+    update file_records_picture
+    set 
+      pic_name = #{picName,jdbcType=VARCHAR},
+      txt_index = #{txtIndex,jdbcType=BIT},
+      order_num = #{orderNum,jdbcType=VARCHAR}
+    where 
+   		fonds_num = #{fondsNum,jdbcType=VARCHAR} and 
+   		catalog_num = #{catalogNum,jdbcType=VARCHAR} and 
+   	 	case_num = #{caseNum,jdbcType=VARCHAR} and 
+    	file_num = #{fileNum,jdbcType=VARCHAR}
+  </update>
+</mapper>

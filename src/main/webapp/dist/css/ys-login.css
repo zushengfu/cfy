@@ -1,0 +1,54 @@
+body {
+  background: url(../img/ysbg.jpg) no-repeat;
+  background-size: cover;
+  color: #fff;
+}
+.ys-login-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 250px;
+  margin: auto;
+  max-width: 300px;
+  font-weight: 600;
+  background: #fff;
+  /*  -webkit-box-shadow: 1px 1px 1px #fff,
+                        2px 2px 1px
+                         -1px -1px 1px 1px #fff;
+  -moz-box-shadow: 1px 1px 1px 1px #fff,
+                     -1px -1px 1px 1px #fff;*/
+  box-shadow: 1px 1px 1px #ccc, -1px -1px 1px #ccc, 2px 2px 1px #ccc, -2px -2px 1px #ccc;
+  padding: 15px 30px;
+}
+.ys-login-wrap .login-title {
+  font-size: 16px;
+  color: #62a8ea;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.ys-login-wrap a {
+  text-decoration: none;
+  color: #62a8ea;
+  font-size: 12px;
+}
+.login-system-title {
+  font-size: 16px;
+  color: #333;
+  margin: 15px 0 10px 0;
+}
+.company-info {
+  position: absolute;
+  bottom: -70px;
+  left: 0;
+  right: 0;
+  max-width: 300px;
+  font-size: 18px;
+  text-align: center;
+  margin: 0 auto;
+}
+.company-info img {
+  width: 60px;
+}

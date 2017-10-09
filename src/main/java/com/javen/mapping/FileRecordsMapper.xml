@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javen.dao.FileRecordsDao" >
+  <resultMap id="BaseResultMap" type="com.javen.model.FileRecords" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="fonds_num" property="fondsNum" jdbcType="VARCHAR" />
+    <result column="catalog_num" property="catalogNum" jdbcType="VARCHAR" />
+    <result column="case_num" property="caseNum" jdbcType="VARCHAR" />
+    <result column="file_num" property="fileNum" jdbcType="VARCHAR" />
+    <result column="subject_name" property="subjectName" jdbcType="VARCHAR" />
+    <result column="security_rank" property="securityRank" jdbcType="VARCHAR" />
+    <result column="file_describe_num" property="fileDescribeNum" jdbcType="VARCHAR" />
+    <result column="org_type" property="orgType" jdbcType="VARCHAR" />
+    <result column="responsibler" property="responsibler" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="safekeeping_term" property="safekeepingTerm" jdbcType="VARCHAR" />
+    <result column="page_num" property="pageNum" jdbcType="INTEGER" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+    <result column="file_year" property="fileYear" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, fonds_num, catalog_num, case_num, file_num, subject_name, security_rank, file_describe_num, 
+    org_type, responsibler, time, file_path, remarks, safekeeping_term, page_num, upload_time,file_year,
+    address,state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_records
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+   <select id="checkFileRecordsExist" resultMap="BaseResultMap" parameterType="com.javen.model.FileRecords" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_records
+    where file_num=#{fileNum,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="queryFileRecords" resultType="String" parameterType="com.javen.model.FileRecords" >
+    select 
+    catalog_num
+    from file_records
+    where fonds_num=#{fondsNum,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="queryFileRecordsNoCondition" resultMap="BaseResultMap">
+    select 
+   	<include refid="Base_Column_List" />
+    from file_records
+  </select>
+  
+  <select id="queryFileInfoByThreeCondition" resultMap="BaseResultMap">
+    select 
+   	<include refid="Base_Column_List" />
+    from file_records
+    <where>   
+              <if test="fondsNum!=null and fondsNum!=''">  
+                     and fonds_num like '%${fondsNum}%'  
+              </if>  
+              <if test="catalogNum!=null and catalogNum!=''">  
+                     and catalog_num like '%${fileYear}%'  
+              </if> 
+              <if test="fileNum and fileNum!=''">  
+                     and file_num like '%${fileNum}%'  
+              </if>
+              <if test="caseNum != null" >
+		     	  and case_num like '%${caseNum}%'
+		      </if>
+		      <if test="subjectName != null" >
+		    	   and subject_name like '%${subjectName}%'
+		      </if>
+		      <if test="securityRank != null" >
+		    	   and security_rank like '%${securityRank}%'
+		      </if>
+		      <if test="fileDescribeNum != null" >
+		    	   and file_describe_num like '%${fileDescribeNum}%'
+		      </if>
+		      <if test="orgType != null" >
+		    	   and org_type like '%${orgType}%'
+		      </if>
+		      <if test="responsibler != null" >
+		    	  and  responsibler like '%${responsibler}%'
+		      </if>
+		      <if test="time != null" >
+		   		   and  time like '%${time}%'
+		      </if>
+		      <if test="filePath != null" >
+		    	  and  file_path like '%${filePath}%'
+		      </if>
+		      <if test="remarks != null" >
+		   		   and  remarks like '%${remarks}%'
+		      </if>
+		      <if test="safekeepingTerm != null" >
+		   		   and  safekeeping_term like '%${safekeepingTerm}%'
+		      </if>
+		      <if test="pageNum != null" >
+		    	  and  page_num like '%${pageNum}%'
+		      </if>
+		      <if test="fileYear != null" >
+		    	  and  file_year like '%${fileYear}%'
+		      </if>
+		      <if test="address != null" >
+		    	  and  address like '%${address}%'
+		      </if>
+		      <if test="pageNum != null" >
+		    	  and  state like '%${state}%'
+		      </if>
+      
+     </where> 
+  </select>
+  
+  <select id="getEntity" resultMap="BaseResultMap" parameterType="com.javen.model.FileRecords">
+    select 
+   	<include refid="Base_Column_List" />
+    from file_records
+    <where>   
+              <if test="fondsNum!=null and fondsNum!=''">  
+                     and fonds_num = #{fondsNum,jdbcType=VARCHAR}  
+              </if>  
+              <if test="catalogNum!=null and catalogNum!=''">  
+                     and catalog_num = #{catalogNum,jdbcType=VARCHAR} 
+              </if> 
+              <if test="fileNum and fileNum!=''">  
+                     and file_num = #{fileNum,jdbcType=VARCHAR}  
+              </if>
+              <if test="caseNum != null and fileNum!=''" >
+		     	  and case_num = #{caseNum,jdbcType=VARCHAR}
+		      </if>
+		      <if test="subjectName != null and fileNum!=''" >
+		    	   and subject_name = #{subjectName,jdbcType=VARCHAR}
+		      </if>
+		      <if test="securityRank != null and fileNum!=''" >
+		    	   and security_rank = #{securityRank,jdbcType=VARCHAR}
+		      </if>
+		      <if test="fileDescribeNum != null and fileNum!=''" >
+		    	   and file_describe_num = #{fileDescribeNum,jdbcType=VARCHAR}
+		      </if>
+		      <if test="orgType != null and fileNum!=''" >
+		    	   and org_type = #{orgType,jdbcType=VARCHAR}
+		      </if>
+		      <if test="responsibler != null and fileNum!=''" >
+		    	  and  responsibler = #{Responsibler,jdbcType=VARCHAR}
+		      </if>
+		      <if test="time != null and fileNum!=''" >
+		   		   and  time = #{time,jdbcType=VARCHAR}
+		      </if>
+		      <if test="filePath != null and fileNum!=''" >
+		    	  and  file_path = '%${filePath}%'
+		      </if>
+		      <if test="remarks != null and fileNum!=''" >
+		   		   and  remarks = #{remarks,jdbcType=VARCHAR}
+		      </if>
+		      <if test="safekeepingTerm != null and fileNum!=''" >
+		   		   and  safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR}
+		      </if>
+		      <if test="pageNum != null and fileNum!=''" >
+		    	  and  page_num = #{pageNum,jdbcType=VARCHAR}
+		      </if>
+		      <if test="fileYear != null and fileYear!=''" >
+		    	  and  file_year = #{fileYear,jdbcType=VARCHAR}
+		      </if>
+		      <if test="address != null and address!=''" >
+		    	  and  address = #{address,jdbcType=VARCHAR}
+		      </if>
+		      <if test="pageNum != null and fileNum!=''" >
+		    	  and  state = #{state,jdbcType=VARCHAR}
+		      </if>
+		      
+      
+     </where> 
+  </select>
+  
+  <select id="cxZs" resultType="java.lang.Integer" >
+    select count
+    (*)   
+    from file_records
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.javen.model.FileRecords" >
+    delete from file_records
+    where ID = #{id,jdbcType=INTEGER} 
+  </delete>
+  
+  <delete id="deleteByFileRecords" parameterType="com.javen.model.FileRecords" >
+    delete from file_records
+    <where>
+     	<if test="fondsNum!=null and fondsNum!=''">  
+            and fonds_num = #{fondsNum,jdbcType=VARCHAR}  
+    	</if>  
+    	<if test="caseNum != null and fondsNum!=''" >
+        	and case_num = #{caseNum,jdbcType=VARCHAR}
+        </if>
+    </where>
+  </delete>
+  
+  <insert id="insert" parameterType="com.javen.model.FileRecords" >
+    insert into file_records (ID, fonds_num, catalog_num, 
+      case_num, file_num, subject_name, 
+      security_rank, file_describe_num, org_type, 
+      responsibler, time, file_path, 
+      remarks, safekeeping_term, page_num, 
+      upload_time,file_Year,address,state)
+    values (#{id,jdbcType=INTEGER}, #{fondsNum,jdbcType=VARCHAR}, #{catalogNum,jdbcType=VARCHAR}, 
+      #{caseNum,jdbcType=VARCHAR}, #{fileNum,jdbcType=VARCHAR}, #{subjectName,jdbcType=VARCHAR}, 
+      #{securityRank,jdbcType=VARCHAR}, #{fileDescribeNum,jdbcType=VARCHAR}, #{orgType,jdbcType=VARCHAR}, 
+      #{responsibler,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{safekeepingTerm,jdbcType=VARCHAR}, #{pageNum,jdbcType=INTEGER}, 
+      #{uploadTime,jdbcType=TIMESTAMP},#{fileYear,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javen.model.FileRecords" >
+    insert into file_records
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fondsNum != null" >
+        fonds_num,
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num,
+      </if>
+      <if test="caseNum != null" >
+        case_num,
+      </if>
+      <if test="fileNum != null" >
+        file_num,
+      </if>
+      <if test="subjectName != null" >
+        subject_name,
+      </if>
+      <if test="securityRank != null" >
+        security_rank,
+      </if>
+      <if test="fileDescribeNum != null" >
+        file_describe_num,
+      </if>
+      <if test="orgType != null" >
+        org_type,
+      </if>
+      <if test="responsibler != null" >
+        responsibler,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="safekeepingTerm != null" >
+        safekeeping_term,
+      </if>
+      <if test="pageNum != null" >
+        page_num,
+      </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
+      <if test="fileYear != null" >
+        file_year,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fondsNum != null" >
+        #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        #{catalogNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectName != null" >
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="securityRank != null" >
+        #{securityRank,jdbcType=VARCHAR},
+      </if>
+      <if test="fileDescribeNum != null" >
+        #{fileDescribeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="responsibler != null" >
+        #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="safekeepingTerm != null" >
+        #{safekeepingTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="pageNum != null" >
+        #{pageNum,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileYear != null" >
+        #{file_year,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javen.model.FileRecords" >
+    update file_records
+    <set >
+      <if test="fondsNum != null" >
+        fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num = #{catalogNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        case_num = #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        file_num = #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectName != null" >
+        subject_name = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="securityRank != null" >
+        security_rank = #{securityRank,jdbcType=VARCHAR},
+      </if>
+      <if test="fileDescribeNum != null" >
+        file_describe_num = #{fileDescribeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        org_type = #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="responsibler != null" >
+        responsibler = #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="safekeepingTerm != null" >
+        safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="pageNum != null" >
+        page_num = #{pageNum,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="fileYear != null" >
+        file_year = #{fileYear,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateFileRecords" parameterType="com.javen.model.FileRecords" >
+    update file_records
+    set fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      case_num = #{caseNum,jdbcType=VARCHAR},
+      subject_name = #{subjectName,jdbcType=VARCHAR},
+      security_rank = #{securityRank,jdbcType=VARCHAR},
+      file_describe_num = #{fileDescribeNum,jdbcType=VARCHAR},
+      org_type = #{orgType,jdbcType=VARCHAR},
+      responsibler = #{responsibler,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR},
+      page_num = #{pageNum,jdbcType=INTEGER},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      file_year = #{fileYear,jdbcType=VARCHAR}
+      address = #{address,jdbcType=VARCHAR}
+      state = #{state,jdbcType=VARCHAR}
+    where  catalog_num = #{catalogNum,jdbcType=VARCHAR} and file_num = #{fileNum,jdbcType=VARCHAR}
+  </update>
+  <update id="hookCaseInfo" parameterType="String" >
+    update file_records
+    set 
+      case_num=#{2}
+    where fonds_num = #{0} and case_num=#{1}
+  </update>
+  <update id="hookFondsInfo" parameterType="String" >
+    update file_records
+    set 
+      fonds_num=#{1}
+    where fonds_num = #{0}
+  </update>
+  
+  <update id="updateMoreFileRecords" parameterType="String" >
+    update file_records
+    set 
+      #{4}=replace(#{4},#{5},#{6})
+    where fonds_num = #{0} and case_num=#{1} and file_year=#{2} and file_num=#{3}
+  </update>
+</mapper>

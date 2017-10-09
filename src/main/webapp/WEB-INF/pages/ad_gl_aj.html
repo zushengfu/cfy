@@ -1,0 +1,382 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="glyphicon glyphicon-home"></i> 档案管理系统</a></li>
+        <li>档案管理</li>
+        <li class="active">案卷管理</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+  <section class="container-fluid" style="max-width:95%;background:#ffffff" >
+    <div class="row clearfix">
+      <div class="col-md-12">
+          <div style="font-family:'微软雅黑';padding-top: 20px;">
+            <i class="glyphicon glyphicon-search"></i>  查询条件
+            <hr>
+          </div>
+          <form class="form-horizontal" role="form" id="adGlAjForm">
+            <div class="form-group">
+              <label class="col-md-1 control-label">全宗编号</label>
+              <div class="col-md-2">
+                <select  name="fondsNum" class="form-control">
+                </select>
+              </div>
+              <label class="col-md-1 control-label" style="padding-left:0px;padding-right:0px;">年度(目录号)</label>
+              <div class="col-md-2">
+                <select  name="catalogNum" class="form-control">
+                </select>
+              </div>
+              <label class="col-md-1 control-label">案卷名称</label>
+              <div class="col-md-5">
+                <input type="text" class="form-control"" placeholder="请输入案卷名称" name="caseName">
+              </div>
+            </div>
+            <div class="form-group">
+              <label id="adXzAjFoAjbh" class="col-md-1 control-label" required="required">案卷号</label>
+              <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="请输入案卷编号" name="caseNum">
+              </div>
+              <label class="col-md-1 control-label">保管期限</label>
+              <div class="col-md-2">
+                <select name="safekeepingTerm" class="form-control">
+                <option></option>
+                <option>长期</option>
+                <option>永久</option>
+              </select>
+              </div>
+              <label class="col-md-1 control-label">起始时间</label>
+              <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="请输入起始时间" name="startTime"><i class="glyphicon glyphicon-calendar form-control-feedback" style="position: absolute;left:75%;"></i>
+              </div>
+              <label class="col-md-1 control-label">结束时间</label>
+              <div class="col-md-2">
+                <input type="text" class="form-control"" placeholder="请输入结束时间" name="endTime"><i class="glyphicon glyphicon-calendar form-control-feedback" style="position: absolute;left:75%;"></i>
+              </div>
+            </div>
+            <div class="form-group">
+
+              <label class="col-md-1 control-label">分类号</label>
+              <div class="col-md-2">
+                <input type="text" class="form-control"" placeholder="请输入责任者" name="classifyNum">
+              </div>
+              <label class="col-md-1 control-label">归档号</label>
+              <div class="col-md-2">
+                        <input type="text" class="form-control"" placeholder="请输入归档号" name="fileNum">
+              </div>
+              <label class="col-md-1 control-label">机构类别</label>
+              <div class="col-md-2">
+                    <input type="text" class="form-control"" placeholder="请输入机构类别" name="orgType">
+              </div>
+              <label class="col-md-1 control-label" style="padding-left:0px;">档案馆代码</label>
+                <div class="col-md-2">
+                      <input type="text" class="form-control"" placeholder="请输入档案馆代码" name="archiveNum">
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="form-group">
+                  <div class="col-md-3 pull-right" style="text-align:right">
+                  <button id="adGlAjFoSs"  type="button" class=" btn btn-info"><i class="glyphicon glyphicon-search"></i>&nbsp;&nbsp;搜索</button>
+                 
+                  <button id="adGlAjFoCz"  class=" btn btn-default" type="button"><i class="glyphicon glyphicon-repeat"></i>&nbsp;&nbsp;重置</button>
+                  </div>
+
+
+              </div>
+
+          </form>
+      </div>
+    </div>
+
+  </section>
+  <section class="container-fluid" style="max-width:95%;background:#ffffff;margin-top: 30px;" >
+      <div class="row clearfix">
+        <div class="col-md-12">
+
+          <div style="font-family:'微软雅黑';padding-top: 20px;">
+            <i class="glyphicon glyphicon-book"></i>  查询结果
+            <hr>
+          </div>
+          <div id="adGlAjTabTool">
+                <button class="btn btn-danger">批量删除</button>
+          </div>
+          <table id="adGlAjTab">
+
+          </table>
+        </div>
+      </div>
+  </section>
+
+  <!-- 模态框（Modal）1 -->
+     <div class="modal fade" id="adGlAjCkMod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog container-fluid">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background:#62a8ea">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">×</span></button>
+                                    <h3 class="modal-title text-center">详情信息</h3>
+                                </div>
+                                <div class="modal-body">
+                                <div  class="row clearfix">
+                                <div class="col-md-8 col-md-offset-2" >
+                                     <form class="form-horizontal" role="form" id="adGlAjCkForm">
+
+                                              <div class="form-group">
+                                                    <div class="col-md-1 pull-right">
+                                                        <button type="button" class="btn btn-self1">&nbsp;&nbsp;打印&nbsp;&nbsp;</button>
+                                                    </div>
+                                              </div>
+                                              <div class="form-group">
+                                                <label class="col-md-3 control-label">全宗编号</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control" name="fondsNum" readonly="readonly" >
+                                                </div>
+                                                <label class="col-md-3 control-label">年度(目录号)</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control" name="catalogNum" readonly="readonly">
+                                                </div>
+                                              </div>
+                                              <div class="form-group">
+                                                <label id="adXzAjFoAjbh" class="col-md-3 control-label" >案卷编号</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control"  name="caseNum" readonly="readonly">
+                                                </div>
+                                                <label class="col-md-3 control-label">案卷名称</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control" name="caseName" readonly="readonly">
+                                                </div>
+
+                                              </div>
+
+
+                                              <div class="form-group">
+                                                <label class="col-md-3 control-label">库房号</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control" name="roomNum" readonly="readonly">
+                                                </div>
+                                                <label class="col-md-3 control-label">排柜号</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control" name="cabNum" readonly="readonly">
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <label class="col-md-3 control-label">起始时间</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control" = name="startTime" readonly="readonly">
+                                                </div>
+                                                <label class="col-md-3 control-label">结束时间</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control" name="endTime" readonly="readonly">
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <label class="col-md-3 control-label">年度</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control" name="caseYear" readonly="readonly">
+                                                </div>
+                                                <label class="col-md-3 control-label">责任者</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control" name="responsibler" readonly="readonly">
+                                                </div>
+                                              </div>
+                                              <div class="form-group">
+                                                <label class="col-md-3 control-label">保管期限</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" name="safekeepingTerm" class="form-control" readonly="readonly">
+
+
+                                                </div>
+                                                <label class="col-md-3 control-label">分类号</label>
+                                                <div class="col-md-3">
+                                                  <input type="text" class="form-control" name="classifyNum" readonly="readonly">
+                                                </div>
+                                              </div>
+                                              <div class="form-group">
+                                                <label class="col-md-3 control-label">机构类别</label>
+                                                <div class="col-md-3">
+                                                      <input type="text" class="form-control" name="orgType" readonly="readonly">
+                                                </div>
+                                                  <label class="col-md-3 control-label">归档号</label>
+                                                    <div class="col-md-3">
+                                                          <input type="text" class="form-control" name="fileNum" readonly="readonly">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                <label class="col-md-3 control-label">档案馆代码</label>
+                                                <div class="col-md-3">
+                                                      <input type="text" class="form-control" name="archiveNum" readonly="readonly">
+                                                </div>
+                                                  <label class="col-md-3 control-label">页数</label>
+                                                    <div class="col-md-3">
+                                                          <input type="text" class="form-control" name="pages" readonly="readonly">
+                                                    </div>
+                                                </div>
+
+
+                                              <div class="form-group">
+                                                <label class="col-md-3 control-label" >备注</label>
+                                                <div class="col-md-9">
+                                                  <input type="text" class="form-control"  name="remarks" readonly="readonly">
+                                                </div>
+
+
+                                              </div>
+
+                              </form>
+                                </div>
+
+
+                                  </div>
+                                </div>
+                                <div class="modal-footer" style="text-align:center;border:0">
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+     </div>
+           <!-- /.modal -->
+           <!-- 模态框（Modal）2 -->
+        <div class="modal fade" id="adGlAjXgMod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog container-fluid">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background:#62a8ea;">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">×</span></button>
+                                    <h3 class="modal-title text-center">修改案卷信息</h3>
+                                </div>
+                                <div class="modal-body">
+                                <div  class="row clearfix">
+                                    <form class="form-horizontal col-md-10 col-md-offset-1" role="form" id="adGlAjXgForm">
+                                              <div class="form-group">
+                                                <label class="col-md-2 control-label">全宗编号  <i style="color:red;vertical-align: middle;">*</i></label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control" name="fondsNum" readonly="readonly">
+                                                </div>
+                                                <label class="col-md-2 control-label">年度(目录号)  <i style="color:red;vertical-align: middle;">*</i></label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control" name="catalogNum" readonly="readonly">
+                                                </div>
+                                              </div>
+                                              <div class="form-group">
+                                                <label id="adXzAjFoAjbh" class="col-md-2 control-label" required="required">案卷编号  <i style="color:red;vertical-align: middle;">*</i></label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control"  name="caseNum">
+                                                </div>
+                                                <label class="col-md-2 control-label">案卷名称  <i style="color:red;vertical-align: middle;">*</i></label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control" name="caseName">
+                                                </div>
+
+                                              </div>
+
+
+                                              <div class="form-group">
+                                                <label class="col-md-2 control-label">库房号</label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control"  name="roomNum">
+                                                </div>
+                                                <label class="col-md-2 control-label">排柜号</label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control" name="cabNum">
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <label class="col-md-2 control-label">起始时间</label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control"  name="startTime"><i class="glyphicon glyphicon-calendar form-control-feedback" style="position: absolute;left:75%;"></i>
+                                                </div>
+                                                <label class="col-md-2 control-label">结束时间</label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control" name="endTime"><i class="glyphicon glyphicon-calendar form-control-feedback" style="position: absolute;left:75%;"></i>
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <label class="col-md-2 control-label">年度</label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control" name="caseYear">
+                                                </div>
+                                                <label class="col-md-2 control-label">责任者</label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control" name="responsibler">
+                                                </div>
+                                              </div>
+                                              <div class="form-group">
+                                                <label class="col-md-2 control-label">保管期限</label>
+                                                <div class="col-md-4">
+                                                  <select name="safekeepingTerm" class="form-control">
+                                                  <option>短期</option>
+                                                  <option>长期</option>
+                                                  <option>永久</option>
+                                                </select>
+                                                </div>
+                                                <label class="col-md-2 control-label">分类号</label>
+                                                <div class="col-md-4">
+                                                  <input type="text" class="form-control" name="classifyNum">
+                                                </div>
+                                              </div>
+                                              <div class="form-group">
+                                                <label class="col-md-2 control-label">机构类别</label>
+                                                <div class="col-md-4">
+                                                      <input type="text" class="form-control" name="orgType">
+                                                </div>
+                                                  <label class="col-md-2 control-label">归档号</label>
+                                                    <div class="col-md-4">
+                                                          <input type="text" class="form-control" name="fileNum">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                <label class="col-md-2 control-label">档案馆代码</label>
+                                                <div class="col-md-4">
+                                                      <input type="text" class="form-control" name="archiveNum">
+                                                </div>
+                                                  <label class="col-md-2 control-label">页数</label>
+                                                    <div class="col-md-4">
+                                                          <input type="text" class="form-control" name="pages">
+                                                    </div>
+                                                </div>
+
+
+                                              <div class="form-group">
+                                                <label class="col-md-2 control-label" >备注</label>
+                                                <div class="col-md-10">
+                                                  <input type="text" class="form-control"  name="remarks">
+                                                </div>
+
+
+                                              </div>
+
+
+
+                                        </form>
+
+                                  </div>
+                                </div>
+                                <div class="modal-footer" style="text-align:center">
+
+                                    <button id="adGlQzXgModSub" type="button" class="btn btn-info">保存</button>
+
+
+                                </div>
+                            </div>
+                          </div>
+        </div>
+           <!-- /.modal -->
+
+
+
+
+

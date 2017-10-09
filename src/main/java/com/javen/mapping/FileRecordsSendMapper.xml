@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javen.dao.FileRecordsSendDao" >
+  <resultMap id="BaseResultMap" type="com.javen.model.FileRecordsSend" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="fonds_num" property="fondsNum" jdbcType="VARCHAR" />
+    <result column="catalog_num" property="catalogNum" jdbcType="VARCHAR" />
+    <result column="case_num" property="caseNum" jdbcType="VARCHAR" />
+    <result column="file_num" property="fileNum" jdbcType="VARCHAR" />
+    <result column="subject_name" property="subjectName" jdbcType="VARCHAR" />
+    <result column="security_rank" property="securityRank" jdbcType="VARCHAR" />
+    <result column="file_describe_num" property="fileDescribeNum" jdbcType="VARCHAR" />
+    <result column="org_type" property="orgType" jdbcType="VARCHAR" />
+    <result column="responsibler" property="responsibler" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="safekeeping_term" property="safekeepingTerm" jdbcType="VARCHAR" />
+    <result column="page_num" property="pageNum" jdbcType="INTEGER" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+    <result column="file_year" property="fileYear" jdbcType="VARCHAR" />
+    <result column="sender" property="sender" jdbcType="VARCHAR" />
+    <result column="accepter" property="accepter" jdbcType="VARCHAR" />
+    <result column="data_state" property="dataState" jdbcType="INTEGER" />
+    <result column="oprate_state" property="oprateState" jdbcType="INTEGER" />
+    <result column="beiyong" property="beiyong" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, fonds_num, catalog_num, case_num, file_num, subject_name, security_rank, file_describe_num, 
+    org_type, responsibler, time, file_path, remarks, safekeeping_term, page_num, upload_time, 
+    file_year, sender, accepter, data_state, oprate_state, beiyong
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_records_send
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="acceptFileREcordsSend" resultMap="BaseResultMap" parameterType="com.javen.model.FileRecordsSend" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_records_send
+    where accepter=#{accepter,jdbcType=VARCHAR} and data_state=1
+  </select>
+  <select id="cxYjJn" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_records_send
+  </select>
+   <select id="cxYjJnNewCount" resultType="java.lang.Integer" >
+    select 
+ 	count(*)
+    from file_records_send
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from file_records_send
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javen.model.FileRecordsSend" >
+    insert into file_records_send (ID, fonds_num, catalog_num, 
+      case_num, file_num, subject_name, 
+      security_rank, file_describe_num, org_type, 
+      responsibler, time, file_path, 
+      remarks, safekeeping_term, page_num, 
+      upload_time, file_year, sender, 
+      accepter, data_state, oprate_state, 
+      beiyong)
+    values (#{id,jdbcType=INTEGER}, #{fondsNum,jdbcType=VARCHAR}, #{catalogNum,jdbcType=VARCHAR}, 
+      #{caseNum,jdbcType=VARCHAR}, #{fileNum,jdbcType=VARCHAR}, #{subjectName,jdbcType=VARCHAR}, 
+      #{securityRank,jdbcType=VARCHAR}, #{fileDescribeNum,jdbcType=VARCHAR}, #{orgType,jdbcType=VARCHAR}, 
+      #{responsibler,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{safekeepingTerm,jdbcType=VARCHAR}, #{pageNum,jdbcType=INTEGER}, 
+      #{uploadTime,jdbcType=TIMESTAMP}, #{fileYear,jdbcType=VARCHAR}, #{sender,jdbcType=VARCHAR}, 
+      #{accepter,jdbcType=VARCHAR}, #{dataState,jdbcType=INTEGER}, #{oprateState,jdbcType=INTEGER}, 
+      #{beiyong,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javen.model.FileRecordsSend" >
+    insert into file_records_send
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fondsNum != null" >
+        fonds_num,
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num,
+      </if>
+      <if test="caseNum != null" >
+        case_num,
+      </if>
+      <if test="fileNum != null" >
+        file_num,
+      </if>
+      <if test="subjectName != null" >
+        subject_name,
+      </if>
+      <if test="securityRank != null" >
+        security_rank,
+      </if>
+      <if test="fileDescribeNum != null" >
+        file_describe_num,
+      </if>
+      <if test="orgType != null" >
+        org_type,
+      </if>
+      <if test="responsibler != null" >
+        responsibler,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="safekeepingTerm != null" >
+        safekeeping_term,
+      </if>
+      <if test="pageNum != null" >
+        page_num,
+      </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
+      <if test="fileYear != null" >
+        file_year,
+      </if>
+      <if test="sender != null" >
+        sender,
+      </if>
+      <if test="accepter != null" >
+        accepter,
+      </if>
+      <if test="dataState != null" >
+        data_state,
+      </if>
+      <if test="oprateState != null" >
+        oprate_state,
+      </if>
+      <if test="beiyong != null" >
+        beiyong,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fondsNum != null" >
+        #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        #{catalogNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectName != null" >
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="securityRank != null" >
+        #{securityRank,jdbcType=VARCHAR},
+      </if>
+      <if test="fileDescribeNum != null" >
+        #{fileDescribeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="responsibler != null" >
+        #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="safekeepingTerm != null" >
+        #{safekeepingTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="pageNum != null" >
+        #{pageNum,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileYear != null" >
+        #{fileYear,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="accepter != null" >
+        #{accepter,jdbcType=VARCHAR},
+      </if>
+      <if test="dataState != null" >
+        #{dataState,jdbcType=INTEGER},
+      </if>
+      <if test="oprateState != null" >
+        #{oprateState,jdbcType=INTEGER},
+      </if>
+      <if test="beiyong != null" >
+        #{beiyong,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javen.model.FileRecordsSend" >
+    update file_records_send
+    <set >
+      <if test="fondsNum != null" >
+        fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num = #{catalogNum,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        case_num = #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null" >
+        file_num = #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectName != null" >
+        subject_name = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="securityRank != null" >
+        security_rank = #{securityRank,jdbcType=VARCHAR},
+      </if>
+      <if test="fileDescribeNum != null" >
+        file_describe_num = #{fileDescribeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        org_type = #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="responsibler != null" >
+        responsibler = #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="safekeepingTerm != null" >
+        safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="pageNum != null" >
+        page_num = #{pageNum,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileYear != null" >
+        file_year = #{fileYear,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null" >
+        sender = #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="accepter != null" >
+        accepter = #{accepter,jdbcType=VARCHAR},
+      </if>
+      <if test="dataState != null" >
+        data_state = #{dataState,jdbcType=INTEGER},
+      </if>
+      <if test="oprateState != null" >
+        oprate_state = #{oprateState,jdbcType=INTEGER},
+      </if>
+      <if test="beiyong != null" >
+        beiyong = #{beiyong,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javen.model.FileRecordsSend" >
+    update file_records_send
+    set fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      catalog_num = #{catalogNum,jdbcType=VARCHAR},
+      case_num = #{caseNum,jdbcType=VARCHAR},
+      file_num = #{fileNum,jdbcType=VARCHAR},
+      subject_name = #{subjectName,jdbcType=VARCHAR},
+      security_rank = #{securityRank,jdbcType=VARCHAR},
+      file_describe_num = #{fileDescribeNum,jdbcType=VARCHAR},
+      org_type = #{orgType,jdbcType=VARCHAR},
+      responsibler = #{responsibler,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR},
+      page_num = #{pageNum,jdbcType=INTEGER},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      file_year = #{fileYear,jdbcType=VARCHAR},
+      sender = #{sender,jdbcType=VARCHAR},
+      accepter = #{accepter,jdbcType=VARCHAR},
+      data_state = #{dataState,jdbcType=INTEGER},
+      oprate_state = #{oprateState,jdbcType=INTEGER},
+      beiyong = #{beiyong,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateFileRecordsSend" parameterType="com.javen.model.FileRecordsSend" >
+     update file_records_send
+    set 
+      subject_name = #{subjectName,jdbcType=VARCHAR},
+      security_rank = #{securityRank,jdbcType=VARCHAR},
+      file_describe_num = #{fileDescribeNum,jdbcType=VARCHAR},
+      org_type = #{orgType,jdbcType=VARCHAR},
+      responsibler = #{responsibler,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      safekeeping_term = #{safekeepingTerm,jdbcType=VARCHAR},
+      page_num = #{pageNum,jdbcType=INTEGER},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      file_year = #{fileYear,jdbcType=VARCHAR},
+      sender = #{sender,jdbcType=VARCHAR},
+      accepter = #{accepter,jdbcType=VARCHAR},
+      data_state = #{dataState,jdbcType=INTEGER},
+      oprate_state = #{oprateState,jdbcType=INTEGER},
+      beiyong = #{beiyong,jdbcType=VARCHAR}
+    where fonds_num = #{fondsNum,jdbcType=VARCHAR} and
+      catalog_num = #{catalogNum,jdbcType=VARCHAR} and
+      case_num = #{caseNum,jdbcType=VARCHAR} and
+      file_num = #{fileNum,jdbcType=VARCHAR}
+  </update>
+</mapper>

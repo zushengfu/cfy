@@ -1,0 +1,124 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="glyphicon glyphicon-home"></i> 档案管理系统</a></li>
+        <li class="active">导入数据</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+  <section class="container-fluid" style="max-width:95%;background:#ffffff" >
+    <div class="row clearfix">
+      <div class="col-md-11" style=" margin-left:4%;">
+
+            <div class="row" style="padding-top: 20px;">
+              <i class="glyphicon glyphicon-book"></i>  导入数据
+              <hr>
+            </div>
+            <div class="row" style="padding-top: 20px;">
+            	<div class="col-md-1 col-md-offset-4" style="font-size:2rem;color:lightblue"><i class="glyphicon glyphicon-plus"></i></div>
+              <div class="col-md-3 " style="font-size:2rem;color:lightblue">
+                   
+
+                  <input id="files"  type="file" name="">
+					 
+              </div>
+              <div class="row" style="padding-top: 20px;">
+                <div class="col-md-12">
+                  <table id="admSjdrTab">
+
+                  </table>
+                </div>
+
+              </div>
+              <div class="row" style="padding-top: 20px;">
+                <div class="col-md-2 col-lg-offset-5">
+                    <button class="btn btn-info" type="" id="admSjdrBtn">添加入库</button>
+                </div>
+
+              </div>
+
+            </div>
+
+
+        </div>
+     </div>
+</section>
+
+<script>
+    var loaddata;
+        var $admSjdrTab=$("#admSjdrTab").bootstrapTable({
+                    pagination: true,
+                    sidePagination: 'client',
+                    pageList:[10,20,30,40],
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    pageSize: 10,
+                    showColumns:true,
+                    showExport: true,             //是否显示导出
+                    exportOptions:{
+                        ignoreColumn: [4,5]
+                    },
+                    columns: [
+                    {
+                    checkbox: true
+                    },
+                    {
+                        field: 'fondsNum',
+                        align: 'center',
+                        title: "全宗号"
+                    },{
+                        field: 'fondsName',
+                        align: 'center',
+                        title: "全宗名称"
+                    },{
+                        field: 'roomNum',
+                        align: 'center',
+                        title: "库房号"
+                    },{
+                        field: 'cabNum',
+                        align: 'center',
+                        title: "排柜号"
+                    },{
+                        field: 'startTime',
+                        align: 'center',
+                        title: "起始时间"
+
+                    },{
+                        field: 'endTime',
+                        align: 'center',
+                        title: "结束时间"
+                    }
+                    ]
+
+                });
+
+    $("#files").change(function( event ) {
+            var files = event.target.files;
+            readExcel(files[0], function(data){
+                console.log(data[0].起始时间);
+
+                $admSjdrTab.bootstrapTable('load',data)
+            });
+        });
+    $('#admSjdrBtn').on('click', function() {
+    	
+        var data=JSON.stringify($admSjdrTab.bootstrapTable('getSelections')[0]);
+        
+        $.ajax({
+            url: '/cfy/fond/adXzQz.do',
+            type: 'POST',
+            contentType:"Application/JSON; charset=utf-8",
+            data: data
+        })
+        .done(function(backdata) {
+            console.log(backdata);
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+
+    });
+
+</script>

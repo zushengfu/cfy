@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="keywords" content="无虑"/>
+    <meta name="description" content="无虑"/>
+</head>
+<body>
+用户名: <input class="name" type="text"> <button class="jinru">进入聊天室</button>
+<div class="num"></div>
+<div class="msg">
+
+</div>
+<!-- <input type="text" class="xiaoxi"> <button onclick="submit()">发送</button>
+<div class="userList"></div> -->
+<button class="liaotian">聊天房间</button>
+<!-- <button class="likai">离开</button> -->
+<script src="../dist/js/socket.io.min.js"></script>
+<script>
+    // 当引入socket的时候会在window下添加一个 io 全局
+    // websocket
+    //     1.http 连接方式进行连接 并且 告诉服务器要创建一个websocket连接
+    //     2.服务器 没问题
+    //     3.正式建立 websocket 连接
+    const jinru = document.querySelector('.jinru'),
+        msg = document.querySelector('.msg'),
+        num = document.querySelector('.num'),
+        userList = document.querySelector('.userList'),
+        liaotian = document.querySelector('.liaotian'),
+        likai = document.querySelector('.likai');
+    let socket,
+        name,
+        userid;
+/*     liaotian.onclick = function (){
+        socket.emit('jrlt',{  });
+        socket.on('hello',(data) => {
+            console.log(data);
+        });
+    };
+    likai.onclick = function (){
+        socket.emit('tclt',{  })
+    }; */
+    
+    jinru.onclick = function (){
+        name = document.querySelector('.name').value;
+        init(name)
+    };
+    function init(username){
+        userid = Date.now();
+        name = username;
+        socket = io.connect('/');
+        socket.emit('login',{ name:name, userid:userid});
+        socket.on('login',(data) => {
+            msg.innerHTML += `${data.data.name} 加入聊天室<br>`;
+            num.innerHTML = `当前在线人数${data.data.num}<br>`;
+            userList.innerHTML = '';
+            for(let i in data.userList){
+                userList.innerHTML += `当前在线列表${data.userList[i]}<br>`;
+            }
+        });
+        socket.on('out',(data) => {
+            msg.innerHTML += `${data.name} 退出聊天室<br>`;
+            num.innerHTML = `当前在线人数${data.num}<br>`;
+            userList.innerHTML = '';
+            console.log(data);
+            for(let i in data.userList){
+                userList.innerHTML += `当前在线列表${data.userList[i]}<br>`;
+            }
+        });
+        socket.on('liaotian',(data) => {
+            msg.innerHTML += `${data.content}<br>`;
+        })
+    }
+    function submit(){
+        let txt = document.querySelector('.xiaoxi').value;
+        socket.emit('msg',{ content:txt })
+    }
+    /*socket.on('liaotian',(data) => {
+        div.innerHTML += `${data.content}<br>`;
+    })*/
+    /*socket.on('login',(data) => {
+        console.log(data);
+        div.innerHTML += `${data.name} 加入聊天室`;
+    })*/
+    /*socket.on('wulv',(data) => {
+        console.log(data);
+        socket.emit('xiexie' , { name:'收到' })
+    })*/
+</script>
+</body>
+</html>

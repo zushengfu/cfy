@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="./../dist/css/bootstrap.min.css">
+    <link rel="alternate" type="text/css" href="./../dist/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="./../dist/css/common.css">
+    <link rel="stylesheet" type="text/css" href="./../dist/css/index.css">
+    <script src="./../dist/js/jquery-3.2.1.min.js"></script>
+    <script src="./../dist/js/vue.min.js"></script>
+    <script src="./../dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- /header -->
+<div class="container-fluid">
+  <header>
+  </header>
+    <div id="index-form-log">
+    <form action="/cfy/user/regist.do" method='post'>
+        <div class="text-center">
+          <h2>用户注册</h2>
+        </div>
+        <div class="form-group">
+           <input id="index-inp-un" name="userName" class="form-control" placeholder="帐号" />
+        </div>
+        <div class="form-group">
+           <input id="index-inp-pd" name="userPassword" type="password" class="form-control" placeholder="密码"/>
+        </div>
+
+        <div class="form-group">
+           <input id="index-inp-pd" name="telephone" class="form-control" placeholder="手机号"/>
+        </div>
+        <div class="form-group">
+          <input id="index-inp-pd" type="email" name="Email" class="form-control" placeholder="邮箱"/>
+        </div>
+        <div class="form-group">
+                <select name="cardType" class="form-control">
+                <option id="s1"  value="shenfenzheng">身份证</option>
+                </select>
+        </div>
+        <div class="form-group">
+          <input id="index-inp-pd" name="cardNumber" class="form-control" placeholder="证件号码"/>
+        </div>
+        <div class="form-group">
+          <input type="checkbox">我以阅读并接受用户协议
+        </div>
+        <div class="form-group">
+          <button id="index-btn-sub" class="form-control btn btn-info" type="submit">注&nbsp;册</button>
+        </div>
+        <div class="form-group yincang">
+          <input type="" name="remarks" value="333"/>
+        </div>
+        <div class="form-group">
+
+           <a href="/cfy/forward/login.do" class="pull-right">返回登录</a>
+        </div>
+      </form>
+  </div>
+  <footer id="index-footer">
+  畅飞扬档案管理系统
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+/*
+* @Author: Marte
+* @Date:   2017-07-11 11:38:24
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-09-29 15:54:10
+*/
+html,body{
+  font-family:"微软雅黑";
+  font-size:15px;
+ }
+
+hr{
+      border-top:1px solid #807979;
+}
+img {
+  max-width: 64%; /* This rule is very important, please do not ignore this! */
+  max-height: 96%;
+}
+
+.text-white{
+    color: white;
+ }
+.xianshi{
+    display: block;
+ }
+.yincang{
+    display:none;
+}
+.nopadding{
+    padding: 0;
+}
+.nopaddingl{
+    padding-left: 0;
+}
+.nopaddingr{
+    padding-right: 0;
+}
+.tabOperA{
+
+  font-size:1rem;
+}
+.tabOperACk{
+
+}
+
+.tabOperABj{
+}
+.tabOperASc{
+  color:red;
+}
+.modal-dialog{
+    width:60%;
+}
+.modal-header{
+        background:#62a8ea;
+        color:#ffffff;
+}
+.form-horizontal .control-label{
+    text-align:left;
+    font-weight:500;
+    font-size:0.95rem;
+    padding-right:0;
+}
+.btn-self1{
+    color:#62a8ea;background-color:#fff;border-color:#62a8ea;
+}
+.btn-self1.focus,.btn-self1:focus{
+    color:#62a8ea;background-color:#e6e6e6;border-color:#62a8ea;
+}
+.btn-self1:hover{
+    color:#62a8ea;background-color:#e6e6e6;border-color:#62a8ea;
+}
+#adXzQzFoRes,#adXzQzFoSub,#adXzAjFoRes,#adXzAjFoSub,#adXzJnFoRes,#adXzJnFoSub,#adXzGdFoRes,#adXzGdFoSub{
+    font-family:'黑体';
+    font-weight:500;
+    font-size:1.4rem;
+    line-height:20px
+}
+.xinzengformrow{
+  background: #f5f8f3;
+  border:1px solid lightgrey;
+  border-right:0px;
+  border-bottom:0;
+}
+
+.xinzenglabel{
+  height:50px;
+  line-height:50px;
+  margin-bottom: 0;
+  font-weight:500;
+}
+.xinzenginput{
+      background: #ffffff;
+      height:50px;
+      border-left:1px solid lightgrey;
+      border-right:1px solid lightgrey;
+     padding-top:8px;
+}
+
+#adGlQzTab{
+  font-size:0.9rem;
+}
+#adGlAjTab{
+  font-size:0.9rem;
+}
+
+#indexFoLog{
+  width:500px;
+  height:500px;
+  position:absolute;
+  top:30%;
+  left:38%;
+}
+#adGlJnCkTpMod{
+  width:100%;
+}
+
+
+
+
+#adGlQzCkForm .control-label{
+    color:#b9c1c9;
+}
+#adGlQzCkForm input{
+  border:0;
+  background:rgba(0,0,0,0);
+}
+#adGlQzXgForm input{
+   background:#fbfbf5;
+}
+#adGlQzXgForm select{
+   background:#fbfbf5;
+}
+#adGlAjXgForm input{
+    background:#fbfbf5;
+}
+#adGlAjXgForm select{
+   background:#fbfbf5;
+}
+#adGlAjCkForm input{
+    border:0;
+     background:rgba(0,0,0,0);
+}
+#adGlJnCkForm .control-label{
+        color:#b9c1c9;
+}
+#adGlJnCkForm .control-label{
+    color:#b9c1c9;
+}
+#adGlJnCkForm input{
+  border:0;
+  background:rgba(0,0,0,0);
+}
+#adGlJnXgForm input{
+   background:#fbfbf5;
+}
+#adGlJnXgForm select{
+   background:#fbfbf5;
+}
+#adGlJnCkForm input{
+  border:0;
+  background:rgba(0,0,0,0);
+}
+#adGlGdXgForm input{
+   background:#fbfbf5;
+}
+#adGlGdXgForm select{
+   background:#fbfbf5;
+}
+#adGlJnCkTpMod .modal-dialog{
+            width:1060px;
+            margin-left:250px;
+            height:680px;
+}
+#adGlJnCkTpMod .modal-content{
+            width:100%;
+            height:100%;
+}
+#adGlJnCkTpDiv{
+            height:100%;
+            background:grey;
+            padding:0px 0px;
+            text-align:center;
+            font-size:0;
+            line-height:680px;
+            vertical-align:middle;
+
+}
+#adGlJnCkTpTab{
+    height:680px;
+}
+#adGlJnCkTpDiv img{
+    max-width: 64%;
+    max-height: 96%;
+
+}
+#adGlJnCkTpTool{
+    background:rgba(0,0,9,0.3);
+    height:80px;
+    position: relative;
+    top:-80px;
+    line-height:80px;
+    vertical-align:middle;
+    font-size:2rem;
+}
+
+#adGlGdCkTpMod .modal-dialog{
+            width:1060px;
+            margin-left:250px;
+            height:680px;
+}
+#adGlGdCkTpMod .modal-content{
+            width:100%;
+            height:100%;
+}
+
+
+
+
+
+
+
+#adGlGdCkTpMod .modal-dialog{
+            width:1060px;
+            margin-left:250px;
+            height:680px;
+}
+#adGlGdCkTpMod .modal-content{
+            width:100%;
+            height:100%;
+}
+#adGlGdCkTpDiv{
+            height:100%;
+            background:grey;
+            padding:0px 0px;
+            text-align:center;
+            font-size:0;
+            line-height:680px;
+            vertical-align:middle;
+
+}
+#adGlGdCkTpTab{
+    height:680px;
+}
+#adGlGdCkTpDiv img{
+    max-width: 64%;
+    max-height: 96%;
+
+}
+#adGlGdCkTpTool{
+    background:rgba(0,0,9,0.3);
+    height:80px;
+    position: relative;
+    top:-80px;
+    line-height:80px;
+    vertical-align:middle;
+    font-size:2rem;
+}
+
+#adGlGdCkTpMod .modal-dialog{
+            width:1060px;
+            margin-left:250px;
+            height:680px;
+}
+#adGlGdCkTpMod .modal-content{
+            width:100%;
+            height:100%;
+}

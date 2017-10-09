@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javen.dao.SecurityRankDao" >
+  <resultMap id="BaseResultMap" type="com.javen.model.SecurityRank" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="skey" property="skey" jdbcType="VARCHAR" />
+    <result column="svalue" property="svalue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, skey, svalue
+  </sql>
+  <select id="selectByPrimarykey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from security_rank
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getSecurityRank" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from security_rank
+  </select>
+  
+  <select id="check" resultMap="BaseResultMap" parameterType="com.javen.model.SecurityRank" >
+    select 
+    <include refid="Base_Column_List" />
+    from security_rank
+    where skey=#{skey} and svalue=#{svalue}
+  </select>
+  
+  <delete id="deleteByPrimarysKey" parameterType="com.javen.model.SecurityRank" >
+    delete from security_rank
+    <where> 
+	    <if test="skey != null">
+	         skey = #{skey}
+	    </if> 
+	    <if test="svalue != null">
+	        AND svalue = #{svalue}
+	    </if>
+  	</where>
+  </delete>
+  
+  <delete id="restoreSecurityRank" >
+    delete from security_rank
+    where id &gt; 4
+  </delete>
+  
+  <insert id="insert" parameterType="com.javen.model.SecurityRank" >
+    insert into security_rank (skey, svalue
+      )
+    values ( #{skey,jdbcType=VARCHAR}, #{svalue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.javen.model.SecurityRank" >
+    insert into security_rank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="skey != null" >
+        skey,
+      </if>
+      <if test="svalue != null" >
+        svalue,
+      </if>
+    </trim>
+    <trim prefix="svalues (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="skey != null" >
+        #{skey,jdbcType=VARCHAR},
+      </if>
+      <if test="svalue != null" >
+        #{svalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryskeySelective" parameterType="com.javen.model.SecurityRank" >
+    update security_rank
+    <set >
+      <if test="skey != null" >
+        skey = #{skey,jdbcType=VARCHAR},
+      </if>
+      <if test="svalue != null" >
+        svalue = #{svalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryskey" parameterType="com.javen.model.SecurityRank" >
+    update security_rank
+    set skey = #{skey,jdbcType=VARCHAR},
+      svalue = #{svalue,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

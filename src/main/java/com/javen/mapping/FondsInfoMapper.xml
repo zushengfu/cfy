@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javen.dao.FondsInfoDao" >
+  <resultMap id="BaseResultMap" type="com.javen.model.FondsInfo" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="fonds_name" property="fondsName" jdbcType="VARCHAR" />
+    <result column="fonds_num" property="fondsNum" jdbcType="VARCHAR" />
+    <result column="room_num" property="roomNum" jdbcType="VARCHAR" />
+    <result column="cab_num" property="cabNum" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="catalog_num" property="catalogNum" jdbcType="INTEGER" />
+    <result column="case_num" property="caseNum" jdbcType="INTEGER" />
+    <result column="file_num" property="fileNum" jdbcType="INTEGER" />
+    <result column="fonds_year" property="fondsYear" jdbcType="VARCHAR" />
+    <result column="file_len" property="fileLen" jdbcType="INTEGER" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, fonds_name, fonds_num, room_num, cab_num, start_time, end_time, catalog_num, 
+    case_num, file_num, fonds_year, file_len, remarks, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fonds_info
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="queryFondsInfo" resultType="String" parameterType="com.javen.model.FondsInfo" >
+    select 
+    fonds_num
+    from fonds_info
+  </select>
+  
+  <select id="queryFondsInfoByFondsNameAndFondsNum" resultMap="BaseResultMap" parameterType="com.javen.model.FondsInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from fonds_info
+    <where>   
+              <if test="fondsName!=null and fondsName!=''">  
+                     and fonds_name like '%${fondsName}%'  
+              </if>  
+              <if test="fondsNum!=null and fondsNum!=''">  
+                     and fonds_num like '%${fondsNum}%'  
+              </if> 
+     </where> 
+  </select>
+  
+   <select id="checkFondExist" resultMap="BaseResultMap" parameterType="com.javen.model.FondsInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from fonds_info
+    where fonds_name=#{fondsName,jdbcType=VARCHAR} and fonds_num=#{fondsNum,jdbcType=VARCHAR}
+  </select>
+ 
+   <select id="getFondsInfoForAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from fonds_info
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fonds_info
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="deleteByFondsNum" parameterType="String" >
+    delete from fonds_info
+    where  fonds_num=#{fondsNum,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.javen.model.FondsInfo" >
+    insert into fonds_info (ID, fonds_name, fonds_num, 
+      room_num, cab_num, start_time, 
+      end_time, catalog_num, case_num, 
+      file_num, fonds_year, file_len, 
+      remarks, create_time)
+    values (#{id,jdbcType=INTEGER}, #{fondsName,jdbcType=VARCHAR}, #{fondsNum,jdbcType=VARCHAR}, 
+      #{roomNum,jdbcType=VARCHAR}, #{cabNum,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{catalogNum,jdbcType=INTEGER}, #{caseNum,jdbcType=INTEGER}, 
+      #{fileNum,jdbcType=INTEGER}, #{fondsYear,jdbcType=VARCHAR}, #{fileLen,jdbcType=INTEGER}, 
+      #{remarks,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.javen.model.FondsInfo" >
+    insert into fonds_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fondsName != null" >
+        fonds_name,
+      </if>
+      <if test="fondsNum != null" >
+        fonds_num,
+      </if>
+      <if test="roomNum != null" >
+        room_num,
+      </if>
+      <if test="cabNum != null" >
+        cab_num,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num,
+      </if>
+      <if test="caseNum != null" >
+        case_num,
+      </if>
+      <if test="fileNum != null" >
+        file_num,
+      </if>
+      <if test="fondsYear != null" >
+        fonds_year,
+      </if>
+      <if test="fileLen != null" >
+        file_len,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fondsName != null" >
+        #{fondsName,jdbcType=VARCHAR},
+      </if>
+      <if test="fondsNum != null" >
+        #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNum != null" >
+        #{roomNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cabNum != null" >
+        #{cabNum,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        #{catalogNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseNum != null" >
+        #{caseNum,jdbcType=INTEGER},
+      </if>
+      <if test="fileNum != null" >
+        #{fileNum,jdbcType=INTEGER},
+      </if>
+      <if test="fondsYear != null" >
+        #{fondsYear,jdbcType=VARCHAR},
+      </if>
+      <if test="fileLen != null" >
+        #{fileLen,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javen.model.FondsInfo" >
+    update fonds_info
+    <set >
+      <if test="fondsName != null" >
+        fonds_name = #{fondsName,jdbcType=VARCHAR},
+      </if>
+      <if test="fondsNum != null" >
+        fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNum != null" >
+        room_num = #{roomNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cabNum != null" >
+        cab_num = #{cabNum,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogNum != null" >
+        catalog_num = #{catalogNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseNum != null" >
+        case_num = #{caseNum,jdbcType=INTEGER},
+      </if>
+      <if test="fileNum != null" >
+        file_num = #{fileNum,jdbcType=INTEGER},
+      </if>
+      <if test="fondsYear != null" >
+        fonds_year = #{fondsYear,jdbcType=VARCHAR},
+      </if>
+      <if test="fileLen != null" >
+        file_len = #{fileLen,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javen.model.FondsInfo" >
+    update fonds_info
+    set 
+      fonds_num = #{fondsNum,jdbcType=VARCHAR},
+      room_num = #{roomNum,jdbcType=VARCHAR},
+      cab_num = #{cabNum,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      catalog_num = #{catalogNum,jdbcType=INTEGER},
+      case_num = #{caseNum,jdbcType=INTEGER},
+      file_num = #{fileNum,jdbcType=INTEGER},
+      fonds_year = #{fondsYear,jdbcType=VARCHAR},
+      file_len = #{fileLen,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where fonds_name = #{fondsName,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateMoreFondsInfo" parameterType="String" >
+    update fonds_info
+    set #{0} = replace(#{0},#{1},#{2})
+    where fonds_num=#{3}
+  </update>
+</mapper>

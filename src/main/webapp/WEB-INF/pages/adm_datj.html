@@ -1,0 +1,74 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="glyphicon glyphicon-home"></i> 档案管理系统</a></li>
+        <li class="active">档案提交</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+  <section class="content container-fluid" style="max-width:95%;background:#ffffff" >
+    <div class="row clearfix">
+      <div class="col-md-11" style=" margin-left:4%;">
+
+        <div class="row" style="padding-top: 20px;">
+          <i class="glyphicon glyphicon-search"></i>  选择条件
+          <hr>
+        </div>
+        <div class="row" style="padding-top: 20px;">
+          <form class="form-horizontal col-md-12" >
+          <div class="form-group">
+            <label class="control-label col-md-1">档案类型:</label>
+            <div class="col-md-2">
+              <select name="admDaTjType" class="form-control">
+                <option>卷内文件</option>
+                <option>归档文件</option>
+              </select>
+            </div>
+
+            <div class="col-md-2">
+              <button class="btn btn-info" type="button" id="admDaTjCxBtn"><i class="glyphicon glyphicon-search"></i>  查询</button>
+            </div>
+          </div>
+          <div class="form-group">
+          </div>
+          </form>
+        </div>
+
+
+        </div>
+        </div>
+  </section>
+
+   <section class="content container-fluid" style="max-width:95%;background:#ffffff;margin-top: 30px;" >
+      <div class="row clearfix">
+        <div class="col-md-11" style=" margin-left:4%;">
+
+          <div class="row clearfix"  style="padding-top: 20px;">
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active">
+                <a href="" data-toggle="tab" id="admDaTjCkTabBtn">
+                <i class="glyphicon glyphicon-search"></i>  查询结果
+                </a>
+            </li>
+              <li><a href="" id="admDaTjCkztBtn" data-toggle="tab"><i class="glyphicon glyphicon-search"></i>  已提交列表</a></li>
+
+            </ul>
+
+          </div>
+          <div class="row clearfix" >
+            <br>
+            <div id="adDaTjTabTool">
+                <button id="admDaTjTjshBtn" class="btn btn-warning">提交选中</button>
+                <button class="btn btn-warning">全部提交</button>
+            </div>
+            <table  id="adDaTjTab">
+
+            </table>
+
+
+          </div>
+
+
+        </div>
+      </div>
+   </section>
